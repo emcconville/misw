@@ -4,8 +4,20 @@ LDFLAGS=-lncurses
 
 all: misw
 
-misw: misw.c Makefile
-	${CC} ${CFLAGS} ${LDFLAGS} -o misw misw.c
+main.o: main.c
+	${CC} ${CFLAGS} -c -o main.o main.c
+
+misw.o: misw.c
+	${CC} ${CFLAGS} -c -o misw.o misw.c
+
+misw: main.o misw.o Makefile
+	${CC} ${LDFLAGS} -o misw main.o misw.o
 
 clean:
 	rm -f misw
+
+run: misw
+	./misw
+
+install:
+	date
